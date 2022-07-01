@@ -1,8 +1,13 @@
+import Rotas from "rotas/Rotas"
 import "./App.css"
-export default function App(){
+import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap.js"
+export default function App() {
+    
     return (
         <div>
-            Bem Vindo
+            <Rotas/>
         </div>
+
     )
 }
