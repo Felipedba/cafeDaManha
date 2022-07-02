@@ -1,5 +1,5 @@
 import Lista from "paginas/lista";
-import Login from "paginas/login/Login";
+import Login from "paginas/login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function Rotas() {
