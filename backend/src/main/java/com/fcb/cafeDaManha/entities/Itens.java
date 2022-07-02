@@ -7,26 +7,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fcb.cafeDaManha.entities.enums.Status;
+
 public class Itens implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long  id;
 	private String nome;
+	private Status status;
 
-	public Itens(Integer id, String nome) {
+	public Itens(Long  id, String nome, Status status) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.status = status;
 	}
 
-	public Integer getId() {
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

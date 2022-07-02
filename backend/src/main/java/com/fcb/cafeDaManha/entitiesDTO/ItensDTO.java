@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fcb.cafeDaManha.entities.Itens;
+import com.fcb.cafeDaManha.entities.enums.Status;
 
 public class ItensDTO implements Serializable {
 
@@ -15,22 +16,39 @@ public class ItensDTO implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long  id;
 	private String nome;
+	private Status status;
 
 	public ItensDTO() {
+	}
+
+	public ItensDTO(Long id, String nome, Status status) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.status = status;
 	}
 
 	public ItensDTO(Itens obj) {
 		id = obj.getId();
 		nome = obj.getNome();
+		status = obj.getStatus();
 	}
 
-	public Integer getId() {
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

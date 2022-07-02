@@ -1,7 +1,9 @@
 package com.fcb.cafeDaManha.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -16,14 +18,16 @@ public class Colaborador implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long  id;
 	private String nome;
 	@Column(unique = true)
 	private String cpf;
 	@JsonIgnore
 	private String senha;
 
-	public Colaborador(Integer id, String nome, String cpf, String senha) {
+	private Set<Itens> itens = new HashSet<>();
+
+	public Colaborador(Long  id, String nome, String cpf, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -31,11 +35,15 @@ public class Colaborador implements Serializable {
 		this.senha = senha;
 	}
 
-	public Integer getId() {
+	public Set<Itens> getItens() {
+		return itens;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
