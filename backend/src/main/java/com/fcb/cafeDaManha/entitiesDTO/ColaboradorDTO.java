@@ -21,7 +21,6 @@ public class ColaboradorDTO implements Serializable {
 	private String nome;
 	@Column(unique = true)
 	private String cpf;
-	@JsonIgnore
 	private String senha;
 
 	public ColaboradorDTO() {

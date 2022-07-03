@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik'
 import * as Yup from 'yup';
 import './style.css'
 import { pt } from 'yup-locale-pt';
+import { axiosPost, axiosPut } from 'Api';
+import { toast } from 'react-toastify';
 
 interface props {
     id?: string
@@ -9,19 +11,36 @@ interface props {
     nome?: string
     cpf?: string
     senha?: string
+    fechaModal: () => void
 }
 
-function Cadastrar(props: props) {
-
-    const {
-        titulo = 'Cadastro', nome, cpf,
-         senha
-    } = props;
-
+function Cadastrar({
+        id, titulo = 'Cadastro', nome, cpf, senha, fechaModal} : props) {
        
     Yup.setLocale(pt);
 
     const handleSubmit = (Values: FormikValues) => {
+        if (id === undefined) {
+            axiosPost('/colaborador', Values)
+                .then( () =>  {
+                    toast.success('Dados inseridos com sucesso')
+                    fechaModal();
+                    //History.push('/login');
+                })
+                .catch(()=> {
+                    toast.error('erro ao cadastra colaborador')
+                });
+        } else {
+            axiosPut(`/colaborador/${id}`, Values)
+                .then( ()=> {
+                    toast.success('Dados Atualizados com sucesso')
+                    fechaModal();
+                })
+                .catch(()=> {
+                    toast.error("Error: Sistema Indisponivel")
+                });
+        }
+
     }
 
     function validarCPF(cpf: string) {

@@ -8,16 +8,8 @@ import * as Yup from 'yup';
 import Cadastrar from "componentes/cadastrar";
 import { pt } from "yup-locale-pt";
 
-interface props {
-    id?: string
-    cpf?: string
-    password?: string
-}
 
-function Login(props: props) {
-    const {
-        cpf, password
-    } = props;
+function Login() {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -80,7 +72,7 @@ function Login(props: props) {
 
     return (
         <div>
-            <Formik initialValues={{ cpf: cpf, password: password }}
+            <Formik initialValues={{}}
                 onSubmit={handleSubmit}
                 validationSchema={validations}>
                 <Form>
@@ -140,7 +132,7 @@ function Login(props: props) {
                     </button>
                 </Modal.Header>
                 <Modal.Body>
-                    <Cadastrar />
+                    <Cadastrar fechaModal={handleClose}/>
                 </Modal.Body>
             </Modal>
 
