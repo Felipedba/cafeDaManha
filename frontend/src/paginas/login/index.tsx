@@ -11,19 +11,29 @@ import { validarCPF } from "../../utils/validation";
 import { axiosGet } from "api";
 import { toast } from "react-toastify";
 import { AxiosError, AxiosResponse } from 'axios';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 export default function Login() {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const historys = useNavigate();
 
-    Yup.setLocale(pt);
-   
+    Yup.setLocale(pt);    
+    
+
     const handleSubmit = (values: FormikValues) => {
         axiosGet(`/colaborador?valor=${values.cpf}`)
             .then(function (response: AxiosResponse) {
-                console.log(response.data.nome)
+                if (response.data.senha === values.password) {
+                    historys('/lista');
+                } else{
+                    toast.warning("Senha Incorreta")
+                }    
             })
             .catch(function (error: AxiosError) {
                 toast.error("Colaborador não Cadastrado")
@@ -39,9 +49,9 @@ export default function Login() {
 
     return (
         <div>
-            <Formik initialValues={{ cpf: "", password: "" }} 
-            onSubmit={handleSubmit}
-             validationSchema={validations}>
+            <Formik initialValues={{ cpf: "", password: "" }}
+                onSubmit={handleSubmit}
+                validationSchema={validations}>
                 <Form>
                     <div className="loginBox">
                         <FontAwesomeIcon className="user"
@@ -62,9 +72,9 @@ export default function Login() {
                                 name='password' type='password' />
                             <ErrorMessage component='span' name='password' />
                         </div>
-                        
-                         <input type="submit" className="btnPersonal" value="Login"/>
-                        
+
+                        <input type="submit" className="btnPersonal" value="Login" />
+
                         <div>
                             <button className="btnPersonal"
                                 onClick={handleShow}>
