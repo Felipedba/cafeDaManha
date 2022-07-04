@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "`colaborador`")
 public class Colaborador implements Serializable {
@@ -24,7 +22,7 @@ public class Colaborador implements Serializable {
 	private String nome;
 	@Column(unique = true)
 	private String cpf;
-	
+
 	private String senha;
 	
 	public Colaborador() {

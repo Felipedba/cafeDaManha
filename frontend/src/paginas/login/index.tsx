@@ -7,61 +7,28 @@ import { ErrorMessage, Field, Form, Formik, FormikValues } from "formik";
 import * as Yup from 'yup';
 import Cadastrar from "componentes/cadastrar";
 import { pt } from "yup-locale-pt";
+import { validarCPF } from "../../utils/validation";
+import { axiosGet } from "api";
+import { toast } from "react-toastify";
+import { AxiosError, AxiosResponse } from 'axios';
 
-
-function Login() {
+export default function Login() {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     Yup.setLocale(pt);
-
+   
     const handleSubmit = (values: FormikValues) => {
-    }
+        axiosGet(`/colaborador?valor=${values.cpf}`)
+            .then(function (response: AxiosResponse) {
+                console.log(response.data.nome)
+            })
+            .catch(function (error: AxiosError) {
+                toast.error("Colaborador não Cadastrado")
 
-
-    function validarCPF(cpf: string) {
-        cpf = cpf.replace(/[^\d]+/g, '');
-        if (cpf === '') return false;
-        // Elimina CPFs invalidos conhecidos	
-        if (cpf.length !== 11 ||
-            cpf === "00000000000" ||
-            cpf === "11111111111" ||
-            cpf === "22222222222" ||
-            cpf === "33333333333" ||
-            cpf === "44444444444" ||
-            cpf === "55555555555" ||
-            cpf === "66666666666" ||
-            cpf === "77777777777" ||
-            cpf === "88888888888" ||
-            cpf === "99999999999")
-            return false;
-        // Valida 1o digito	
-        let add = 0;
-        for (let i = 0; i < 9; i++) {
-            add += parseInt(cpf.charAt(i)) * (10 - i);
-        }
-        let rev = 11 - (add % 11);
-        if (rev === 10 || rev === 11) {
-            rev = 0;
-        }
-        if (rev !== parseInt(cpf.charAt(9))) {
-            return false;
-        }
-        // Valida 2o digito	
-        add = 0;
-        for (let i = 0; i < 10; i++) {
-            add += parseInt(cpf.charAt(i)) * (11 - i);
-        }
-        rev = 11 - (add % 11);
-        if (rev === 10 || rev === 11) {
-            rev = 0;
-        }
-        if (rev !== parseInt(cpf.charAt(10))) {
-            return false;
-        }
-        return true;
+            })
     }
 
     const validations = Yup.object().shape({
@@ -72,9 +39,9 @@ function Login() {
 
     return (
         <div>
-            <Formik initialValues={{}}
-                onSubmit={handleSubmit}
-                validationSchema={validations}>
+            <Formik initialValues={{ cpf: "", password: "" }} 
+            onSubmit={handleSubmit}
+             validationSchema={validations}>
                 <Form>
                     <div className="loginBox">
                         <FontAwesomeIcon className="user"
@@ -82,37 +49,28 @@ function Login() {
                             style={{ fontSize: 100, color: "orange" }}
                         />
                         <h3>Seja Bem-Vindo</h3>
-                        <form>
-                            <div className="inputBox">
-                                <div className='login-caixa'>
-                                    <Field type="text"
-                                        name='cpf'
-                                        id='cpf'
-                                        placeholder="CPF (Apenas número)" />
-                                    <div>
-                                        <ErrorMessage component='span' name='cpf' />
-                                    </div>
-                                </div>
+                        <div>
+                            <label htmlFor='cpf'>CPF*</label>
+                            <Field id='cpf' placeholder='DIGITE SEU CPF'
+                                name='cpf' />
+                            <ErrorMessage component='span' name='cpf' />
+                        </div>
 
-                                <div className='login-caixa'>
-                                    <Field type='password'
-                                        name='password'
-                                        id='password'
-                                        placeholder='Digite sua Senha'
-                                    />
-                                    <div>
-                                        <ErrorMessage component='span' name='password' />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <input type="submit" name="" value="Login" />
-
-                        </form>
-                        <button type="button" className="btnPersonal"
-                            onClick={handleShow}>
-                            Cadastra-se
-                        </button>
+                        <div>
+                            <label htmlFor='password'>SENHA*</label>
+                            <Field id='password' placeholder='DIGITE SUA SENHA'
+                                name='password' type='password' />
+                            <ErrorMessage component='span' name='password' />
+                        </div>
+                        
+                         <input type="submit" className="btnPersonal" value="Login"/>
+                        
+                        <div>
+                            <button className="btnPersonal"
+                                onClick={handleShow}>
+                                Cadastra-se
+                            </button>
+                        </div>
                     </div>
                 </Form>
             </Formik>
@@ -132,11 +90,10 @@ function Login() {
                     </button>
                 </Modal.Header>
                 <Modal.Body>
-                    <Cadastrar fechaModal={handleClose}/>
+                    <Cadastrar fechaModal={handleClose} />
                 </Modal.Body>
             </Modal>
 
         </div>
     )
 }
-export default Login;

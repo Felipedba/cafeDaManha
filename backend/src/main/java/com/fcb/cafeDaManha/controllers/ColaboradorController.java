@@ -1,9 +1,6 @@
 package com.fcb.cafeDaManha.controllers;
 
 import java.net.URI;
-import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,10 +20,10 @@ import com.fcb.cafeDaManha.service.ColaboradorService;
 @RestController
 @RequestMapping(value = "/colaborador")
 public class ColaboradorController {
-	
+
 	@Autowired
 	private ColaboradorService colaboradorService;
-	
+
 	@GetMapping("/page")
 	public ResponseEntity<Page<ColaboradorDTO>> buscarColaborador(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -37,43 +34,20 @@ public class ColaboradorController {
 		Page<ColaboradorDTO> list = colaboradorService.buscarColaborador(page, linesPage, direction, orderBy);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<String> insert(@Valid @RequestBody ColaboradorDTO objDTO) {
+	public ResponseEntity<String> insert(@RequestBody ColaboradorDTO objDTO) {
 		Colaborador obj = colaboradorService.fromDTO(objDTO);
 		colaboradorService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body("Cliente adicionado com sucesso, URI = " + uri);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<ColaboradorDTO>> buscaPorParamentro(
-			@RequestParam(value = "parametro", defaultValue = "id") String parametro,
-			@RequestParam(value = "valor", defaultValue = "")String valor){
-		List<ColaboradorDTO> list = colaboradorService.buscarPorParametro(parametro, valor);
+	public ResponseEntity<ColaboradorDTO> buscarPorParametro(
+			@RequestParam(value = "valor", defaultValue = "") String valor) {
+		ColaboradorDTO list = colaboradorService.buscarbuscarPorParametro(valor);
 		return ResponseEntity.ok().body(list);
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

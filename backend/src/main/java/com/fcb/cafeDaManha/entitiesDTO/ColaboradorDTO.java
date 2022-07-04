@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fcb.cafeDaManha.entities.Colaborador;
 
 public class ColaboradorDTO implements Serializable {
@@ -21,6 +20,7 @@ public class ColaboradorDTO implements Serializable {
 	private String nome;
 	@Column(unique = true)
 	private String cpf;
+	
 	private String senha;
 
 	public ColaboradorDTO() {
