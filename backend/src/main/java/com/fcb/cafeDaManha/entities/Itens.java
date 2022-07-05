@@ -31,12 +31,13 @@ public class Itens implements Serializable {
 	
 	public Itens() {
 	}
-
-	public Itens(Long  id, String nome, Status status) {
+	
+	public Itens(Long id, String nome, Status status, Colaborador colaborador) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.status = status;
+		this.colaborador = colaborador;
 	}
 
 	public Status getStatus() {

@@ -19,7 +19,7 @@ public interface ColaboradorRepositorys extends JpaRepository<Colaborador, Long>
 	@Query(value = "insert into colaborador (cpf,nome,senha)"
 			+ "values (?1,?2,?3)",
 			nativeQuery = true)
-	void iserir(String cpf, String nome, String senha);
+	void inserir(String cpf, String nome, String senha);
 	
 	@Query(value = "select * from colaborador where cpf=?1",
 			nativeQuery = true)

@@ -27,7 +27,7 @@ public class ColaboradorService {
 
 	@Transactional
 	public void insert(Colaborador obj) {
-		colaboradorRepository.iserir(obj.getCpf(), obj.getNome(), obj.getSenha());
+		colaboradorRepository.inserir(obj.getCpf(), obj.getNome(), obj.getSenha());
 
 	}
 
