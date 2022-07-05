@@ -8,13 +8,9 @@ import * as Yup from 'yup';
 import Cadastrar from "componentes/cadastrar";
 import { pt } from "yup-locale-pt";
 import { validarCPF } from "../../utils/validation";
-import { axiosGet } from "api";
 import { toast } from "react-toastify";
-import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
-
-
-
+import { axiosGet } from "api";
 
 export default function Login() {
 
@@ -28,15 +24,16 @@ export default function Login() {
 
     const handleSubmit = (values: FormikValues) => {
         axiosGet(`/colaborador?valor=${values.cpf}`)
-            .then(function (response: AxiosResponse) {
+            .then((response) => {
                 if (response.data.senha === values.password) {
+                    localStorage.setItem('CafeManha', response.data.cpf);
                     historys('/lista');
                 } else{
-                    toast.warning("Senha Incorreta")
+                    toast.warning("Usuario ou senha Invalidos")
                 }    
             })
-            .catch(function (error: AxiosError) {
-                toast.error("Colaborador não Cadastrado")
+            .catch(() => {
+                toast.warning("Usuario ou senha Invalidos")
 
             })
     }
