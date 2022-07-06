@@ -67,4 +67,4 @@ Url para visualizar o projeto rodando localmente no browser
 
 # Autor
 
-Felipe Claudino Batista
+Felipe Claudino
