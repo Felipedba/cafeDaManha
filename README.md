@@ -19,8 +19,7 @@ A aplicação consiste em um sistema café da manhã, onde os colaboradores pode
 ## Front end
 - HTML / CSS / JS / TypeScript
 - ReactJS
-- React Native
-- Expo
+- Bootstrap 
 ## Implantação em produção
 - Back end: Heroku
 - Front end web: Netlify
@@ -29,7 +28,7 @@ A aplicação consiste em um sistema café da manhã, onde os colaboradores pode
 # Como executar o projeto
 
 ## Back end
-Pré-requisitos: Java 11
+Pré-requisitos: Java 17
 
 ```bash
 # clonar repositório
@@ -54,10 +53,6 @@ cd front-web
 
 # instalar dependências
 npm install
-
-# Mapbox
-Para ativar a API de mapas localmente é preciso editar o arquivo adicionando o token na variavel 
-# .env
 
 # executar o projeto
 npm start
