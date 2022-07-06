@@ -10,7 +10,7 @@ import { pt } from "yup-locale-pt";
 import { validarCPF } from "../../utils/validation";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { axiosGet } from "api";
+import { axiosGet } from "axiosApi";
 
 export default function Login() {
 

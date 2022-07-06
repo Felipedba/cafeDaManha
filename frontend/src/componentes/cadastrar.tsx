@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import './style.css'
 import { pt } from 'yup-locale-pt';
 import { toast } from 'react-toastify';
-import { axiosPost, axiosPut } from 'api';
+import { axiosPost, axiosPut } from 'axiosApi';
 import { validarCPF } from 'utils/validation';
 import { Colaborador } from 'tipos/types';
 
