@@ -6,7 +6,7 @@ https://cafedamanha-fcb.netlify.app/
 
 ## Sobre o projeto
 
-Café da Manha é uma aplicação full stack web construída durante um teste da seleção para vaga de emprego.
+Café da Manhã é uma aplicação full stack web construída durante um teste da seleção para vaga de emprego.
 
 A aplicação consiste em um sistema café da manhã, onde os colaboradores poderá lista os itens atraves do sistema web.
 
